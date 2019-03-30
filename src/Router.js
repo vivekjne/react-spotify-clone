@@ -24,24 +24,21 @@ const Main = styled.div`
     #41295a
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 `;
-class App extends Component {
+class RouterComponent extends Component {
   render() {
     return (
-      <Router>
-        {/* <Route path="/test" exact component={Test} /> */}
-        <div style={{ width: "100%", height: "100%" }}>
-          <Sidebar />
-          <Player />
-          <Main>
-            <Route path="/" exact component={Home} />
+      <div style={{ width: "100%", height: "100%" }}>
+        <Sidebar />
+        <Player />
+        <Main>
+          <Route path="/" component={Home} />
 
-            {/* <Route path="/about/" component={About} />
+          {/* <Route path="/about/" component={About} />
           <Route path="/users/" component={Users} /> */}
-          </Main>
-        </div>
-      </Router>
+        </Main>
+      </div>
     );
   }
 }
 
-export default App;
+export default RouterComponent;
