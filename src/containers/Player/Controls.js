@@ -10,7 +10,8 @@ import nextActive from "../../assets/images/next_active.png";
 import nextInactive from "../../assets/images/next_inactive.png";
 import repeatInactive from "../../assets/images/repeat_inactive.png";
 import repeatActive from "../../assets/images/repeat_active.png";
-
+import Sound from "react-sound";
+import testSound from "../../assets/sounds/test.mp3";
 const ControlsContainer = styled.div`
   display: flex;
   align-items: center;
@@ -44,7 +45,7 @@ const Progress = styled.div`
 
 const ProgressBar = styled.div`
   position: absolute;
-  width: 200px;
+  width: ${props => props.position * 400}px;
   height: 2px;
   background: #fff;
 `;
@@ -59,7 +60,8 @@ export default class Controls extends React.Component {
     isPrevActive: false,
     isPlayActive: false,
     isNextActive: false,
-    isRepeatActive: false
+    isRepeatActive: false,
+    position: 0
   };
   render() {
     const {
@@ -67,8 +69,11 @@ export default class Controls extends React.Component {
       isPrevActive,
       isPlayActive,
       isNextActive,
-      isRepeatActive
+      isRepeatActive,
+      position
     } = this.state;
+    let duration = this.sound && this.sound.sound.duration;
+    console.log("position=", this.sound && this.sound.sound.duration);
     return (
       <div>
         <ControlsContainer>
@@ -102,7 +107,13 @@ export default class Controls extends React.Component {
         <ProgressContainer>
           <ProgressText>0:00</ProgressText>
           <Progress>
-            <ProgressBar />
+            <ProgressBar position={position / duration} />
+            <Sound
+              ref={ref => (this.sound = ref)}
+              url={testSound}
+              playStatus={Sound.status.PLAYING}
+              onPlaying={({ position }) => this.setState({ position })}
+            />
           </Progress>
           <ProgressText>4:30</ProgressText>
         </ProgressContainer>
