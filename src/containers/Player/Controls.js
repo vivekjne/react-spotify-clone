@@ -111,7 +111,7 @@ export default class Controls extends React.Component {
             <Sound
               ref={ref => (this.sound = ref)}
               url={testSound}
-              playStatus={Sound.status.PLAYING}
+              playStatus={Sound.status.PAUSED}
               onPlaying={({ position }) => this.setState({ position })}
             />
           </Progress>

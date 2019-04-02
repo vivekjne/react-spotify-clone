@@ -43,6 +43,14 @@ const StyledRegister = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  translation: 0.2s;
+
+  &:hover {
+    transform: scale(0.98) translate(0px, 2px);
+  }
+  &:active {
+    transform: translate(0px, 5px) scale(0.95);
+  }
 `;
 
 const StyledLogin = styled.div`

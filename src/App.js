@@ -3,10 +3,11 @@ import logo from "./logo.svg";
 import "./App.css";
 import Sidebar from "./containers/Sidebar";
 import Player from "./containers/Player";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import styled from "styled-components";
 import Home from "./containers/Home";
 import Test from "./containers/Test";
+import Login from "./containers/Login";
 const Main = styled.div`
   margin-left: 240px;
   padding: 30px 10px;
@@ -28,17 +29,21 @@ class App extends Component {
   render() {
     return (
       <Router>
-        {/* <Route path="/test" exact component={Test} /> */}
-        <div style={{ width: "100%", height: "100%" }}>
-          <Sidebar />
-          <Player />
-          <Main>
-            <Route path="/" exact component={Home} />
+        <Switch>
+          <Route path="/signup" exact component={Test} />
+          <Route path="/login" exact component={Login} />
 
-            {/* <Route path="/about/" component={About} />
+          <div style={{ width: "100%", height: "100%" }}>
+            <Sidebar />
+            <Player />
+            <Main>
+              <Route path="/" exact component={Home} />
+
+              {/* <Route path="/about/" component={About} />
           <Route path="/users/" component={Users} /> */}
-          </Main>
-        </div>
+            </Main>
+          </div>
+        </Switch>
       </Router>
     );
   }
