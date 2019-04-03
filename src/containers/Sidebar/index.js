@@ -10,6 +10,9 @@ import searchActive from "../../assets/images/search_active.png";
 import searchInactive from "../../assets/images/search_inactive.png";
 import libraryActive from "../../assets/images/library_active.png";
 import libraryInactive from "../../assets/images/library_inactive.png";
+import adminInactive from "../../assets/images/admin_inactive.png";
+import adminActive from "../../assets/images/admin_active.png";
+import { auth } from "../../firebase";
 import { Route, Link } from "react-router-dom";
 
 const LogoContainer = styled.div`
@@ -69,6 +72,25 @@ const StyledLogin = styled.div`
 `;
 
 export default class Sidebar extends Component {
+  state = {
+    isAuthenticated: false
+  };
+
+  componentWillMount = async () => {
+    try {
+      const isAuthenticatedResponse = await auth.onAuthStateChanged(user => {
+        if (user) {
+          this.setState({ isAuthenticated: true });
+        } else {
+          this.setState({ isAuthenticated: false });
+        }
+      });
+    } catch (err) {
+      console.log(err);
+      this.setState({ isAuthenticated: false });
+    }
+  };
+  componentDidMount = async () => {};
   render() {
     return (
       <SidebarContainer>
@@ -96,17 +118,28 @@ export default class Sidebar extends Component {
             linkImageInactive={libraryInactive}
             linkUrl={"/library"}
           />
+
+          {this.state.isAuthenticated && (
+            <Links
+              linkName="Lite Admin"
+              linkImage={adminActive}
+              linkImageInactive={adminInactive}
+              linkUrl={"/lite-admin"}
+            />
+          )}
         </div>
 
-        <div style={{ marginBottom: "100px" }}>
-          <Link to="/signup" style={{ textDecoration: "none" }}>
-            <StyledRegister>SIGN UP</StyledRegister>
-          </Link>
+        {!this.state.isAuthenticated && (
+          <div style={{ marginBottom: "100px" }}>
+            <Link to="/signup" style={{ textDecoration: "none" }}>
+              <StyledRegister>SIGN UP</StyledRegister>
+            </Link>
 
-          <Link to="/login" style={{ textDecoration: "none" }}>
-            <StyledLogin>LOG IN</StyledLogin>
-          </Link>
-        </div>
+            <Link to="/login" style={{ textDecoration: "none" }}>
+              <StyledLogin>LOG IN</StyledLogin>
+            </Link>
+          </div>
+        )}
       </SidebarContainer>
     );
   }

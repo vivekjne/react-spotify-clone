@@ -30,7 +30,7 @@ class App extends Component {
     return (
       <Router>
         <Switch>
-          <Route path="/signup" exact component={Test} />
+          <Route path="/test" exact component={Test} />
           <Route path="/login" exact component={Login} />
 
           <div style={{ width: "100%", height: "100%" }}>
@@ -38,6 +38,7 @@ class App extends Component {
             <Player />
             <Main>
               <Route path="/" exact component={Home} />
+              <Route path="/lite-admin" exact component={Test} />
 
               {/* <Route path="/about/" component={About} />
           <Route path="/users/" component={Users} /> */}

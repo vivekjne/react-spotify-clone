@@ -7,7 +7,7 @@ const ButtonContainer = styled.div`
   margin: 0px 0px;
   padding: 20px 0px;
   justify-content: space-between;
-  border-bottom: 1px solid #ccc;
+  // border-bottom: 1px solid #ccc;
 `;
 
 const LoginButton = styled.div`
