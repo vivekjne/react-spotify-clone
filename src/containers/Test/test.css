@@ -1,7 +1,9 @@
 .dropzone {
   width: 600px;
   height: 400px;
-  border: 1px solid green;
+  /* border: 2px solid #222; */
   background: #fff;
   padding: 10px;
+  box-shadow: 1px 0px 5px 3px green;
+  outline: lightgreen;
 }

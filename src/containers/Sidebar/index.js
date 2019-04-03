@@ -69,6 +69,7 @@ const StyledLogin = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 `;
 
 export default class Sidebar extends Component {
@@ -89,6 +90,10 @@ export default class Sidebar extends Component {
       console.log(err);
       this.setState({ isAuthenticated: false });
     }
+  };
+
+  logout = () => {
+    auth.signOut().then(() => this.setState({ isAuthenticated: false }));
   };
   componentDidMount = async () => {};
   render() {
@@ -129,17 +134,23 @@ export default class Sidebar extends Component {
           )}
         </div>
 
-        {!this.state.isAuthenticated && (
-          <div style={{ marginBottom: "100px" }}>
+        <div style={{ marginBottom: "100px" }}>
+          {!this.state.isAuthenticated && (
             <Link to="/signup" style={{ textDecoration: "none" }}>
               <StyledRegister>SIGN UP</StyledRegister>
             </Link>
+          )}
 
+          {!this.state.isAuthenticated && (
             <Link to="/login" style={{ textDecoration: "none" }}>
               <StyledLogin>LOG IN</StyledLogin>
             </Link>
-          </div>
-        )}
+          )}
+
+          {this.state.isAuthenticated && (
+            <StyledRegister onClick={this.logout}>LOG OUT</StyledRegister>
+          )}
+        </div>
       </SidebarContainer>
     );
   }
