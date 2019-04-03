@@ -82,7 +82,7 @@ export default class Sidebar extends Component {
             linkName="Home"
             linkImage={homeActive}
             linkImageInactive={homeInactive}
-            linkUrl={"/home"}
+            linkUrl={"/"}
           />
           <Links
             linkName="Search"
