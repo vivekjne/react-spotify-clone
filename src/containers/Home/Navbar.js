@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 const Container = styled.div`
 display:flex;
 flex:1,
@@ -10,7 +11,7 @@ flex-wrap: wrap;
 min-width:400px;
 
 `;
-const StyledLink = styled(Link)`
+const StyledLink = styled(NavLink)`
   color: ${props => (props.active ? "#fff" : "#aeaeae")};
   font-size: 14px;
 
@@ -39,24 +40,50 @@ export default class Navbar extends React.Component {
     return (
       <Container>
         <LinkContainer>
-          <StyledLink active>Featured</StyledLink>
-          <Underline active />
+          <StyledLink
+            exact
+            to="/featured"
+            active={this.props.isActive == "/featured"}
+          >
+            Featured
+          </StyledLink>
+          <Underline active={this.props.isActive == "/featured"} />
         </LinkContainer>
         <LinkContainer>
-          <StyledLink>PODCASTS</StyledLink>
-          <Underline />
+          <StyledLink
+            exact
+            to="/podcasts"
+            active={this.props.isActive == "/podcasts"}
+          >
+            PODCASTS
+          </StyledLink>
+          <Underline active={this.props.isActive == "/podcasts"} />
         </LinkContainer>
         <LinkContainer>
-          <StyledLink>Genres &amp; Moods</StyledLink>
-          <Underline />
+          <StyledLink
+            exact
+            to="/genres"
+            active={this.props.isActive == "/genres"}
+          >
+            Genres &amp; Moods
+          </StyledLink>
+          <Underline active={this.props.isActive == "/genres"} />
         </LinkContainer>
         <LinkContainer>
-          <StyledLink>New Releases</StyledLink>
-          <Underline />
+          <StyledLink exact to="/new" active={this.props.isActive == "/new"}>
+            New Releases
+          </StyledLink>
+          <Underline active={this.props.isActive == "/new"} />
         </LinkContainer>
         <LinkContainer>
-          <StyledLink>Discover</StyledLink>
-          <Underline />
+          <StyledLink
+            exact
+            to="/discover"
+            active={this.props.isActive == "/discover"}
+          >
+            Discover
+          </StyledLink>
+          <Underline active={this.props.isActive == "/discover"} />
         </LinkContainer>
       </Container>
     );
